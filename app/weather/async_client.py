@@ -1,6 +1,4 @@
 import asyncio
-from unittest import result
-
 from app.config import OPENWEATHER_API_KEY, BASE_URL, CITY_URL
 import aiohttp
 
@@ -18,7 +16,6 @@ async def get_weather(lat: float, lon:float):
 
 
 async def get_multi_weather(coords):
-
     async with aiohttp.ClientSession() as session:
         tasks = []
         for lat, lon in coords:
@@ -34,8 +31,8 @@ async def get_multi_weather(coords):
             result.append(await res.json())
     return result
 
-async def multi_city(coords):
 
+async def multi_city(coords):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for city_name in coords:

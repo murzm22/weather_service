@@ -10,3 +10,8 @@ class WeatherResponse(BaseModel):
 
 class CitiesRequest(BaseModel):
     cities: List[str]
+
+class User(BaseModel):
+    username: str
+    password: str
+
