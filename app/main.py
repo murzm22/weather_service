@@ -70,7 +70,7 @@ async def my_weather(current_user: dict = Depends(get_current_user)):
     user = await users_collection.find_one({"username": current_user["username"]})
     if not user or "locations" not in user or not user["locations"]:
         return {"msg": "У пользователя нет сохранённых локаций"}
-    coords = [(loc["lat"], loc["lon"]) for loc in user["locations"]]
+    coords = [(loc[0], loc[1]) for loc in user["locations"]]
     data = await get_multi_weather(coords)
     result = []
     for w in data:
