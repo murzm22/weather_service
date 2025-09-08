@@ -6,11 +6,11 @@ from fastapi.security import OAuth2PasswordRequestForm
 from typing import List, Tuple
 from app.weather.async_client import get_weather_by_coords, get_multi_weather_by_coords, get_multi_weather_by_city, parse_weather_data
 from app.schemas import WeatherResponse, CitiesRequest, User, Location, CityNames, LocationUpdate
-from app.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from jose import jwt
 from datetime import datetime, timedelta, timezone
 from app.db.users import create_user, authenticate_user, get_current_user
 from app.db.mongo import users_collection
+from app.config import settings
 
 app=fastapi.FastAPI()
 templates = Jinja2Templates(directory="app/templates")
@@ -64,8 +64,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> dict:
     if not db_user:
         raise HTTPException(status_code=401, detail="Неверные учетные данные")
 
-    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    token = jwt.encode({"sub": form_data.username, "exp": expire}, SECRET_KEY, algorithm=ALGORITHM)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    token = jwt.encode({"sub": form_data.username, "exp": expire}, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return {"access_token": token, "token_type": "bearer"}
 
 @app.post("/users/locations/add")  # добавление координат городов

@@ -1,15 +1,15 @@
 import asyncio
 import aiohttp
-from app.config import OPENWEATHER_API_KEY, BASE_URL, CITY_URL
+from app.config import settings
 from app.schemas import WeatherResponse
 from typing import List, Dict
 
 
 async def get_weather_by_coords(lat: float, lon:float):
     async with aiohttp.ClientSession() as session:
-            async with session.get(BASE_URL, params={
+            async with session.get(settings.BASE_URL, params={
                 "lat": lat, "lon": lon,
-                "appid": OPENWEATHER_API_KEY,
+                "appid": settings.OPENWEATHER_API_KEY,
                 "units": "metric",
                 "lang": "ru"
             }) as response:
@@ -21,9 +21,9 @@ async def get_multi_weather_by_coords(coords):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for lat, lon in coords:
-            tasks.append(session.get(BASE_URL, params={
+            tasks.append(session.get(settings.BASE_URL, params={
                 "lat": lat, "lon": lon,
-                "appid": OPENWEATHER_API_KEY,
+                "appid": settings.OPENWEATHER_API_KEY,
                 "units": "metric",
                 "lang": "ru"
             }))
@@ -38,7 +38,7 @@ async def get_multi_weather_by_city(coords):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for city_name in coords:
-            tasks.append(session.get(CITY_URL, params={
+            tasks.append(session.get(settings.CITY_URL, params={
                 "q": city_name,
                 "format": "json",
                 "limit": 1

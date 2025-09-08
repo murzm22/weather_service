@@ -1,11 +1,15 @@
-import os
-from dotenv import load_dotenv
+from pydantic import BaseSettings
 
-load_dotenv()  # Загружаем переменные из .env
+class Settings(BaseSettings):
+    OPENWEATHER_API_KEY: str
+    BASE_URL: str = "https://api.openweathermap.org/data/2.5/weather"
+    CITY_URL: str = "https://nominatim.openstreetmap.org/search"
+    SECRET_KEY: str
+    ALGORITHM: str
+    MONGO_URL: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
-OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
-CITY_URL = "https://nominatim.openstreetmap.org/search"
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
