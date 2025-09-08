@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+jinja2 = "*"
+python-multipart = "*"
+pydantic = "*"
+pymongo = "*"
+motor = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+python-jose = {extras = ["cryptography"], version = "*"}
+aiohttp = "*"
+passlib = "*"
+bcrypt = "*"
+
+[dev-packages]
+black = "*"
+isort = "*"
+ruff = "*"
+mypy = "*"
+pytest = "*"
+httpx = "*"
+aiohttp = "*"
+passlib = "*"
+bcrypt = "*"
+
+[requires]
+python_version = "3.13"

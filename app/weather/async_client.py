@@ -1,9 +1,11 @@
 import asyncio
-from app.config import OPENWEATHER_API_KEY, BASE_URL, CITY_URL
 import aiohttp
+from app.config import OPENWEATHER_API_KEY, BASE_URL, CITY_URL
+from app.schemas import WeatherResponse
+from typing import List, Dict
 
 
-async def get_weather(lat: float, lon:float):
+async def get_weather_by_coords(lat: float, lon:float):
     async with aiohttp.ClientSession() as session:
             async with session.get(BASE_URL, params={
                 "lat": lat, "lon": lon,
@@ -15,7 +17,7 @@ async def get_weather(lat: float, lon:float):
 
 
 
-async def get_multi_weather(coords):
+async def get_multi_weather_by_coords(coords):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for lat, lon in coords:
@@ -32,7 +34,7 @@ async def get_multi_weather(coords):
     return result
 
 
-async def multi_city(coords):
+async def get_multi_weather_by_city(coords):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for city_name in coords:
@@ -49,4 +51,15 @@ async def multi_city(coords):
     return result
 
 
-
+def parse_weather_data(data: List[Dict]) -> List[WeatherResponse]: #перевод данных погоды в список WeatherResponse
+    result: List[WeatherResponse] = []
+    for w in data:
+        result.append(
+            WeatherResponse(
+                city=w.get("name"),
+                temperature=w["main"]["temp"],
+                feels_like=w["main"]["feels_like"],
+                description=w["weather"][0]["description"]
+            )
+        )
+    return result
