@@ -5,6 +5,7 @@ from app.config import settings
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 
+
 async def create_user(username: str, password: str): # регистрация
     existing = await users_collection.find_one({"username": username})
     if existing:
@@ -13,6 +14,7 @@ async def create_user(username: str, password: str): # регистрация
     user = {"username": username, "password": hashed_password}
     await users_collection.insert_one(user)
     return {"msg": f"Пользователь {username} зарегистрирован"}
+
 
 
 async def authenticate_user(username: str, password: str): # аутентификация

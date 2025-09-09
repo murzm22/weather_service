@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0f5dab4ba9cafe4d7d92eec1049cc58fd4806256e0785c0ab6a732796b8e626c"
+            "sha256": "1d8ce5fc061398a0bd1f13bd7804e1b38a12f3f70db2e8bbeea642b6af43456f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -206,6 +206,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==4.3.0"
+        },
+        "beanie": {
+            "hashes": [
+                "sha256:07982e42618cea01722f62d2b4028514a508a2c2c2c71ff85f07f6009112ffb3",
+                "sha256:0d5c0e0de09f2a316c74d17bbba1ceb68ebcbfd3046ae5be69038b2023682372"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9' and python_version < '4.0'",
+            "version": "==2.0.0"
         },
         "cffi": {
             "hashes": [
@@ -547,6 +556,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==3.1.6"
+        },
+        "lazy-model": {
+            "hashes": [
+                "sha256:67c112cad3fbc1816d32c070bf3b3ac1f48aefeb4e46e9eb70e12acc92c6859d",
+                "sha256:e425a189897dc926cc79af196a7cb385d1fd3ac7a7bccb4436fc93661f63b811"
+            ],
+            "markers": "python_version >= '3.8' and python_version < '4.0'",
+            "version": "==0.3.0"
         },
         "markupsafe": {
             "hashes": [

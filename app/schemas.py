@@ -1,5 +1,7 @@
-from typing import List
-from pydantic import BaseModel
+from typing import List, Tuple, Optional
+from beanie import Document
+from bson import ObjectId
+from pydantic import BaseModel, Field
 
 
 class WeatherResponse(BaseModel): # для вывода погоды
@@ -14,6 +16,7 @@ class CitiesRequest(BaseModel): # для получения погоды по г
 class User(BaseModel): # в регистрации
     username: str
     password: str
+
 
 class Location(BaseModel):  # для удаления координат
     lat: float
