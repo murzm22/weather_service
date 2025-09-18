@@ -22,11 +22,12 @@ black = "*"
 isort = "*"
 ruff = "*"
 mypy = "*"
-pytest = "*"
 httpx = "*"
 aiohttp = "*"
 passlib = "*"
 bcrypt = "*"
+pytest = "*"
+pytest-asyncio = "*"
 
 [requires]
 python_version = "3.13"
