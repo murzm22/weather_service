@@ -1,5 +1,7 @@
-from typing import List
+from typing import List, Optional
+from beanie import Document
 from pydantic import BaseModel
+from dataclasses import field
 
 
 class WeatherResponse(BaseModel): # для вывода погоды
@@ -11,9 +13,10 @@ class WeatherResponse(BaseModel): # для вывода погоды
 class CitiesRequest(BaseModel): # для получения погоды по городам
     cities: List[str]
 
-class User(BaseModel): # в регистрации
+class AuthData(BaseModel): # в регистрации
     username: str
     password: str
+
 
 class Location(BaseModel):  # для удаления координат
     lat: float
@@ -27,3 +30,11 @@ class LocationUpdate(BaseModel): # для обновления координа�
 
 class CityNames(BaseModel): # # для добавления широты\долготы городов
     cities: list[str]
+
+class User(Document):
+    username: str
+    password: str
+    locations: Optional[List[Location]] = field(default_factory=list)
+
+    class Settings:
+        name = "users"  # коллекция MongoDB

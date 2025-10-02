@@ -1,10 +1,11 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-import os
-from dotenv import load_dotenv
+from beanie import init_beanie
+from app.schemas import User
+from app.config import settings
 
-load_dotenv()  # Загружаем переменные из .env
-
-MONGO_URL = os.getenv("MONGO_URL")
-client = AsyncIOMotorClient(MONGO_URL)
-db = client["weather_service"]  # база данных
-users_collection = db["users"]  # коллекция для пользователей
+async def init_db():
+    client = AsyncIOMotorClient(settings.MONGO_URL)
+    await init_beanie(
+        database=client["weather_service"],
+        document_models=[User],
+    )
