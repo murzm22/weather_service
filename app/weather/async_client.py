@@ -18,23 +18,15 @@ async def get_weather_by_coords(lat: float, lon:float):
 
 
 async def get_multi_weather_by_coords(coords):
-    async with aiohttp.ClientSession() as session:
-        tasks = []
-        for lat, lon in coords:
-            tasks.append(session.get(settings.BASE_URL, params={
-                "lat": lat, "lon": lon,
-                "appid": settings.OPENWEATHER_API_KEY,
-                "units": "metric",
-                "lang": "ru"
-            }))
-        responses = await asyncio.gather(*tasks)
-        result = []
-        for res in responses:
-            result.append(await res.json())
-    return result
+    tasks = [
+        asyncio.create_task(get_weather_by_coords(lat, lon))
+        for lat, lon in coords
+    ]
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+    return results
 
 
-async def get_multi_weather_by_city(coords):
+async def get_multi_coords_by_city(coords):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for city_name in coords:

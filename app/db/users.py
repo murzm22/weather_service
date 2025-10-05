@@ -1,5 +1,4 @@
 from fastapi import HTTPException, Depends
-# from app.db.mongo import users_collection
 from app.db.security import get_password_hash, verify_password
 from app.config import settings
 from fastapi.security import OAuth2PasswordBearer
@@ -24,7 +23,7 @@ async def authenticate_user(username: str, password: str): # аутентифи�
         return None
     return user
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/login")
 
 async def get_current_user(token: str = Depends(oauth2_scheme)): # получаем текущего пользователя по токену
     try:
