@@ -16,6 +16,7 @@ passlib = "*"
 bcrypt = "*"
 beanie = "*"
 motor = "*"
+pydantic-settings = "*"
 
 [dev-packages]
 black = "*"

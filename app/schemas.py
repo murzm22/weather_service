@@ -34,7 +34,7 @@ class CityNames(BaseModel): # # для добавления широты\дол�
 class User(Document):
     username: str
     password: str
-    locations: Optional[List[Location]] = field(default_factory=list)
+    # locations: Optional[List[Location]] = field(default_factory=list)
 
     class Settings:
         name = "users"  # коллекция MongoDB
