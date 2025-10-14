@@ -1,8 +1,11 @@
+import json
+
 from fastapi import Query, Body, Depends, APIRouter
 from app.schemas import WeatherResponse, CitiesRequest, User
 from app.weather.async_client import get_weather_by_coords, get_multi_weather_by_coords, get_multi_coords_by_city, parse_weather_data
 from typing import List, Tuple
 from app.db.users import get_current_user
+from app.cache.cache import redis_client, get_cache, set_cache
 
 
 router = APIRouter(prefix="/weather", tags=["weather"])
@@ -12,12 +15,20 @@ async def weather_by_coords(
         lat: float = Query(...),
         lon: float = Query(...)
 ) -> WeatherResponse:
-    data = await get_weather_by_coords(lat, lon)
+
+    cache_key = f"weather:{lat}:{lon}"
+    cached = await get_cache(cache_key)
+    if cached:
+        data = json.loads(cached)
+    else:
+        data = await get_weather_by_coords(lat, lon)
+        await set_cache(cache_key, json.dumps(data), ttl=300)
+
     return WeatherResponse(
         city=data.get("name"),
         temperature=data["main"]["temp"],
         feels_like=data["main"]["feels_like"],
-        description=data["weather"][0]["description"]
+        description=data["weather"][0]["description"],
     )
 
 @router.post("/by_coords/multi") # Массовый запрос по координатам

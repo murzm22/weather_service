@@ -12,11 +12,12 @@ pymongo = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 python-jose = {extras = ["cryptography"], version = "*"}
 aiohttp = "*"
-passlib = "*"
 bcrypt = "*"
 beanie = "*"
 motor = "*"
 pydantic-settings = "*"
+passlib = {extras = ["argon2"], version = "*"}
+redis = {extras = ["async"], version = "*"}
 
 [dev-packages]
 black = "*"

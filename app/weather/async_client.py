@@ -43,7 +43,7 @@ async def get_multi_coords_by_city(coords):
     return result
 
 
-def parse_weather_data(data: List[Dict]) -> List[WeatherResponse]: #перевод данных погоды в список WeatherResponse
+def parse_weather_data(data: List[Dict]) -> List[WeatherResponse]:
     result: List[WeatherResponse] = []
     for w in data:
         result.append(
