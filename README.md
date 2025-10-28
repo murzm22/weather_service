@@ -23,7 +23,7 @@ Weather Service - пет-проект, созданный для изучени�
 - **Redis (async)** - (планируется)
 - **pytest** (планиуруется)
 
-## Запуск проекта
+## Запуск проекта через docker compose
 **Скопироавть проект:**
 git clone https://github.com/murzm22/weather_service
 
