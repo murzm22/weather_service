@@ -24,15 +24,18 @@ Weather Service - пет-проект, созданный для изучени�
 - **pytest** (планиуруется)
 
 ## Запуск проекта
-Скопироавть проект:
-git clone https://github.com/murzm22/weather_service
-Для работы проекта нужно создать файл .env в корне:
-OPENWEATHER_API_KEY=your_openweather_api_key
-SECRET_KEY==your_secret_key
-MONGO_URL="mongodb://root:example@mongo:27017/weather_service?authSource=admin"
-ALGORITHM="HS256"
-Сборка из корня проекта:
-docker-compose up --build
-Проверь работу:
-https://localhost/docs
+**Скопироавть проект:**
+**git clone https://github.com/murzm22/weather_service**
+
+**Для работы проекта нужно создать файл .env в корне:**
+**OPENWEATHER_API_KEY=your_openweather_api_key**
+**SECRET_KEY==your_secret_key**
+**MONGO_URL="mongodb://root:example@mongo:27017/weather_service?authSource=admin"**
+**ALGORITHM="HS256"**
+
+**Сборка из корня проекта:**
+**docker-compose up --build**
+
+**Проверь работу:**
+**https://localhost/docs**
 
