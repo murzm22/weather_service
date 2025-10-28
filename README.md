@@ -1,4 +1,4 @@
-# Weather Service — Асинхронный веб-сервис погоды на FastAPI
+# Weather Service - Асинхронный веб-сервис погоды на FastAPI
 
 ## Описание проекта
 
